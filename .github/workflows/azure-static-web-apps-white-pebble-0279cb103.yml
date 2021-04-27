@@ -17,7 +17,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          submodules: true
+          submodules: true     
+
+      - name: Build with dotnet
+        run: dotnet build
+
+      - name: dotnet-tests-report
+        uses: zyborg/dotnet-tests-report@v1.2.0        
+        with:
+           set_check_status_from_test_outcome: true
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           
+      - name: Check for test failures
+        if: ${{ failure() }}
+        run: exit 1                    
+          
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
