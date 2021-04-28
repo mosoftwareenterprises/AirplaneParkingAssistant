@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirplaneParkingAssistant", "AirplaneParkingAssistant\AirplaneParkingAssistant.csproj", "{0A307FDA-9544-45CD-8C27-760E040C018D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneParkingAssistant", "AirplaneParkingAssistant\AirplaneParkingAssistant.csproj", "{0A307FDA-9544-45CD-8C27-760E040C018D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirplaneParkingAssistantTests", "AirplaneParkingAssistantTests\AirplaneParkingAssistantTests.csproj", "{31FEF5F3-DE68-4004-882B-DE2C1F5247AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0A307FDA-9544-45CD-8C27-760E040C018D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A307FDA-9544-45CD-8C27-760E040C018D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A307FDA-9544-45CD-8C27-760E040C018D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31FEF5F3-DE68-4004-882B-DE2C1F5247AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31FEF5F3-DE68-4004-882B-DE2C1F5247AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31FEF5F3-DE68-4004-882B-DE2C1F5247AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31FEF5F3-DE68-4004-882B-DE2C1F5247AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
