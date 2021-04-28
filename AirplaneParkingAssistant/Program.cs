@@ -1,3 +1,4 @@
+using AirplaneParkingAssistant.ParkingAssistant;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +17,10 @@ namespace AirplaneParkingAssistant
             builder.Services.AddScoped( sp => new HttpClient { BaseAddress = new Uri( builder.HostEnvironment.BaseAddress ) } );
             builder.Services.AddScoped<ParkingAssistant.ParkingAssistant>();
             builder.Services.AddScoped<ParkingAssistant.ParkIngAssistantModel>();
+            builder.Services.AddScoped<JetParkingRecommender>();
+            builder.Services.AddScoped<JumboParkingRecommender>();
+            builder.Services.AddScoped<PropsParkingRecommender>();
+            builder.Services.AddSingleton<IDataStore, DataStore>();
 
             await builder.Build().RunAsync();
         }

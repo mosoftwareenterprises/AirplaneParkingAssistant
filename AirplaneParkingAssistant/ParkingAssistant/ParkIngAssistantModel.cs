@@ -9,6 +9,13 @@
         E195
     }
 
+    public enum AircraftModel
+    {
+        Jumbos,
+        Jets,
+        Props
+    }
+
     public class ParkIngAssistantModel
     {
         public AircraftType aircraftType { get; set; }
