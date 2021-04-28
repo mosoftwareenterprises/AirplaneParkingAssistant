@@ -13,10 +13,9 @@ namespace AirplaneParkingAssistant.ParkingAssistant
         {
             this.dataStore = dataStore;
             //This is ordered smallest space to biggest, so it finds the smallest parking spot first
-            AllOrderedParkingRecommenders = new List<IParkingRecommender> {
-                propsParkingRecommender,
-                jetParkingRecommender,
-            jumboParkingRecommender            };
+            AllOrderedParkingRecommenders = new List<IParkingRecommender> { propsParkingRecommender,
+                                                                            jetParkingRecommender,
+                                                                            jumboParkingRecommender };
         }
 
         public async Task<string> RecommendSpot( ParkIngAssistantModel aircraft )
