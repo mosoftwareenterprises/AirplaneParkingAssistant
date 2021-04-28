@@ -44,7 +44,6 @@ Will be able to run on any platform, and a lot of devices with dotnet 6 without 
 A drop down with the 5 plane types in them.
 A "Recommend location" button
 A "Park aircraft at recommendation" button.
-A "number of slots available" view for each aircraft type.
 An "Error" display section.
 
 

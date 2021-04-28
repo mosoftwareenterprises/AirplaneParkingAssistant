@@ -4,49 +4,76 @@
 
 <p>Select what flight needs to be parked</p>
 <EditForm Model="model">
-    <InputSelect @bind-Value="model.aircraftType">
-        <option>A380</option>
-        <option>B747</option>
-        <option>A330</option>
-        <option>B777</option>
-        <option>E195</option>
+    <InputSelect @bind-Value="model.aircraftType" @oninput="()=>FlightChanged()">
+        @foreach (var value in Enum.GetValues(typeof(AircraftType)))
+        {
+            <option>@value</option>
+        }
     </InputSelect>
-    <button class="btn btn-primary" @onclick="()=>RecommendParkingSpot()">Recommend location</button>
-    <button class="btn btn-primary" @onclick="()=>ParkAtRecommendedSpot()">Park at recommended location</button>
+    <p><button class="btn btn-primary" @onclick="()=>RecommendParkingSpot()">Recommend location</button></p>
+    @if (RecommendedParkingSpot.Length > 0)
+    {
+        <p>Recommended Parking Spot is : @RecommendedParkingSpot</p>
+        <p><button class="btn btn-primary" @onclick="()=>ParkAtRecommendedSpot()">Park at recommended location</button></p>
+    }
 </EditForm>
-
+@if (parkedSuccessfully)
+{
+    <p>
+        Your flight @model.aircraftType is succesfully parked in spot @RecommendedParkingSpot
+    </p>
+}
 @if (UnableToParkError.Length > 0)
 {
     <div id="blazor-error-ui">
         @UnableToParkError
     </div>
 }
+@inject ParkingAssistant parkingAssistant;
+@inject ParkIngAssistantModel model;
 
 @code {
-    ParkingAssistantModel model = new ParkingAssistantModel();
-
-    class ParkingAssistantModel
-    {
-        public AircraftType aircraftType { get; set; }
-    }
-
-    enum AircraftType
-    {
-        A380,
-        B747,
-        A330,
-        B777,
-        E195
-    }
+    string RecommendedParkingSpot = string.Empty;
+    bool parkedSuccessfully = false;
 
     private async Task RecommendParkingSpot()
     {
         UnableToParkError = string.Empty;
 
+        try
+        {
+            RecommendedParkingSpot = await parkingAssistant.RecommendSpot(model);
+        }
+        catch (Exception ex)
+        {
+            UnableToParkError = ex.Message;
+        }
+
     }
     private async Task ParkAtRecommendedSpot()
     {
+        UnableToParkError = string.Empty;
+        try
+        {
+            parkedSuccessfully = await parkingAssistant.Park(RecommendedParkingSpot);
+            if (!parkedSuccessfully)
+            {
+                UnableToParkError = "Unable to park!";
+            }
 
+        }
+        catch (Exception ex)
+        {
+            UnableToParkError = ex.Message;
+        }
+    }
+
+    private async Task FlightChanged()
+    {
+        UnableToParkError = string.Empty;
+        parkedSuccessfully = false;
+        RecommendedParkingSpot = string.Empty;
+        StateHasChanged();
     }
 
     private string UnableToParkError = string.Empty;
