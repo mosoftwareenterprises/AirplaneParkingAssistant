@@ -44,6 +44,7 @@ Will be able to run on any platform, and a lot of devices with dotnet 6 without 
 A drop down with the 5 plane types in them.
 A "Recommend location" button
 A "Park aircraft at recommendation" button.
+Feedback to the user about the recommendation and when it has been parked
 An "Error" display section.
 
 
@@ -76,3 +77,10 @@ Implement front end first. Not tested for now due to time limits.
 We would need to have the parking slots being time sensitive. At present we have no concept of time.
 
 We also need to consider what if a plane is parked while the attendant is deciding.
+
+Separate the ViewModel from the back end.
+Streamline the parking recommender code into a base class, as repetitive
+Fill out the Unit Tests - focussing on edge cases.
+Add bUnit style Blazor component tests
+Add Mutation testing checks in pipeline
+Make sure Domain Language is clear spot vs slot vs parking space

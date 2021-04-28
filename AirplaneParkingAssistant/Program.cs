@@ -17,10 +17,13 @@ namespace AirplaneParkingAssistant
             builder.Services.AddScoped( sp => new HttpClient { BaseAddress = new Uri( builder.HostEnvironment.BaseAddress ) } );
             builder.Services.AddScoped<ParkingAssistant.ParkingAssistant>();
             builder.Services.AddScoped<ParkingAssistant.ParkIngAssistantModel>();
-            builder.Services.AddScoped<JetParkingRecommender>();
-            builder.Services.AddScoped<JumboParkingRecommender>();
-            builder.Services.AddScoped<PropsParkingRecommender>();
             builder.Services.AddSingleton<IDataStore, DataStore>();
+
+            //Note the order here is important. It MUST be smallest parking slot to biggest!
+            builder.Services.AddScoped<IParkingRecommender, PropsParkingRecommender>();
+            builder.Services.AddScoped<IParkingRecommender, JetParkingRecommender>();
+            builder.Services.AddScoped<IParkingRecommender, JumboParkingRecommender>();
+            //See above comment!
 
             await builder.Build().RunAsync();
         }

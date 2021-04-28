@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AirplaneParkingAssistant.ParkingAssistant
@@ -7,15 +8,12 @@ namespace AirplaneParkingAssistant.ParkingAssistant
     {
         private readonly IDataStore dataStore;
 
-        private List<IParkingRecommender> AllOrderedParkingRecommenders;
+        private IList<IParkingRecommender> AllOrderedParkingRecommenders;
 
-        public ParkingAssistant( IDataStore dataStore, JumboParkingRecommender jumboParkingRecommender, JetParkingRecommender jetParkingRecommender, PropsParkingRecommender propsParkingRecommender )
+        public ParkingAssistant( IDataStore dataStore, IEnumerable<IParkingRecommender> parkingRecommenders )
         {
             this.dataStore = dataStore;
-            //This is ordered smallest space to biggest, so it finds the smallest parking spot first
-            AllOrderedParkingRecommenders = new List<IParkingRecommender> { propsParkingRecommender,
-                                                                            jetParkingRecommender,
-                                                                            jumboParkingRecommender };
+            AllOrderedParkingRecommenders = parkingRecommenders.ToList();
         }
 
         public async Task<string> RecommendSpot( ParkIngAssistantModel aircraft )
