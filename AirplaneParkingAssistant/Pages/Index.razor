@@ -4,7 +4,7 @@
 
 <p>Select what flight needs to be parked</p>
 <EditForm Model="model">
-    <InputSelect @bind-Value="model.aircraftType" @oninput="()=>FlightChanged()">
+    <InputSelect @bind-Value="model.aircraftType" @oninput="()=>ResetAll()">
         @foreach (var value in Enum.GetValues(typeof(AircraftType)))
         {
             <option>@value</option>
@@ -25,9 +25,9 @@
 }
 @if (UnableToParkError.Length > 0)
 {
-    <div id="blazor-error-ui">
+    <p>
         @UnableToParkError
-    </div>
+    </p>
 }
 @inject ParkingAssistant parkingAssistant;
 @inject ParkIngAssistantModel model;
@@ -35,48 +35,40 @@
 @code {
     string RecommendedParkingSpot = string.Empty;
     bool parkedSuccessfully = false;
+    private string UnableToParkError = string.Empty;
 
     private async Task RecommendParkingSpot()
     {
-        UnableToParkError = string.Empty;
+        ResetAll();
 
-        try
+        RecommendedParkingSpot = await parkingAssistant.RecommendSpot(model);
+        if (string.IsNullOrEmpty(RecommendedParkingSpot))
         {
-            RecommendedParkingSpot = await parkingAssistant.RecommendSpot(model);
+            UnableToParkError = "No spaces found to park at.";
         }
-        catch (Exception ex)
-        {
-            UnableToParkError = ex.Message;
-        }
-
     }
     private async Task ParkAtRecommendedSpot()
     {
-        UnableToParkError = string.Empty;
-        try
-        {
-            parkedSuccessfully = await parkingAssistant.Park(RecommendedParkingSpot);
-            if (!parkedSuccessfully)
-            {
-                UnableToParkError = "Unable to park!";
-            }
+        ResetErrors();
 
-        }
-        catch (Exception ex)
+        parkedSuccessfully = await parkingAssistant.Park(model, RecommendedParkingSpot);
+        if (!parkedSuccessfully)
         {
-            UnableToParkError = ex.Message;
+            UnableToParkError = "Unable to park!";
         }
     }
 
-    private async Task FlightChanged()
+    private void ResetAll()
+    {
+        ResetErrors();
+        RecommendedParkingSpot = string.Empty;
+    }
+    private void ResetErrors()
     {
         UnableToParkError = string.Empty;
         parkedSuccessfully = false;
-        RecommendedParkingSpot = string.Empty;
-        StateHasChanged();
     }
 
-    private string UnableToParkError = string.Empty;
 }
 
 
