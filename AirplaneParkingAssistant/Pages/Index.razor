@@ -1,6 +1,7 @@
 ﻿@page "/"
 
-<h1>Hello, welcome to the parking assistant</h1>
+<h1>Hello, welcome to the parking assistant </h1>
+<a href="https://blog.markoliver.website/">Interview test by Mark Oliver</a>
 
 <p>Select what flight needs to be parked</p>
 <EditForm Model="model">
@@ -29,6 +30,7 @@
         @UnableToParkError
     </p>
 }
+
 @inject ParkingAssistant parkingAssistant;
 @inject ParkIngAssistantModel model;
 
