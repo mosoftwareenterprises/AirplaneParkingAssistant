@@ -84,3 +84,17 @@ Fill out the Unit Tests - focussing on edge cases.
 Add bUnit style Blazor component tests
 Add Mutation testing checks in pipeline
 Make sure Domain Language is clear spot vs slot vs parking space
+
+
+### Challenges faced
+
+* How much to optimise from the start.
+* Differences between the Model and type of the aircraft. Mixed them up 
+
+
+### Lessons Learned
+
+* Building a good looking UI with Blazor is very fast.
+* Clean code is great, but can lead you to over abstract
+* Your code is "never finished"
+* Injecting IEnumerables via DI container is very simple, and adheres to the order of registration.

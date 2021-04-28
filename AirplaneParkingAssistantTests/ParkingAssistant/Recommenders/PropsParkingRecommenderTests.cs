@@ -17,7 +17,7 @@ namespace AirplaneParkingAssistant.ParkingAssistant.Tests
 
             //Assert
             Assert.IsTrue( result, "Did not find a parking space" );
-            Assert.AreEqual( "Props_75", foundParkingSpace, "Incorrect slot found" );
+            Assert.AreEqual( "Props_0", foundParkingSpace, "Incorrect slot found" );
         }
 
         [TestMethod()]

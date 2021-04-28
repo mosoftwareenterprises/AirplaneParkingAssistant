@@ -14,16 +14,12 @@ namespace AirplaneParkingAssistant.ParkingAssistant
             for (int i = 0; i < 25; i++)
             {
                 jumboParkingSpots.Add( $"Jumbos_{i}", null );
+                propParkingSpots.Add( $"Props_{i}", null );
             }
 
-            for (int i = 25; i < 75; i++)
+            for (int i = 0; i < 50; i++)
             {
                 jetParkingSpots.Add( $"Jets_{i}", null );
-            }
-
-            for (int i = 75; i < 100; i++)
-            {
-                propParkingSpots.Add( $"Props_{i}", null );
             }
         }
 
